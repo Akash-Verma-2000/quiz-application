@@ -1,7 +1,10 @@
 # Quiz Application
 
-The Quize Application is a robust platform that facilitates the creation, management, and participation in quizzes. This application offers users the ability to create quizzes, view all active quizzes, view all quizzes, and view the results. The system integrates JWT-based user authentication for secure sign-in and sign-up functionalities. Additionally, API endpoints are well-documented using Swagger UI for enhanced usability.
+The Quiz Application is a robust platform that facilitates the creation, management, and participation in quizzes. This application offers users the ability to create quizzes, view all active quizzes, view all quizzes, and view the results. The system integrates JWT-based user authentication for secure sign-in and sign-up functionalities. Additionally, API endpoints are well-documented using Swagger UI for enhanced usability.
 
+## Live Link 
+
+https://quiz-application-pufd.onrender.com
 
 ## Technologies
 
@@ -72,7 +75,7 @@ Replace your_mongodb_connection_string with your actual MongoDB connection strin
 
         - **`repository/`**
 
-            - **`quiz.crepository.js:`** Contains all the data base related functons.
+            - **`quiz.crepository.js:`** Contains all the data base related functions.
 
         - **`route/`**
 
@@ -90,7 +93,7 @@ Replace your_mongodb_connection_string with your actual MongoDB connection strin
 
         - **`repository/`**
 
-            - **`user.crepository.js:`** Contains all the data base related functons.
+            - **`user.crepository.js:`** Contains all the database-related functions.
 
         - **`route/`**
 
@@ -109,7 +112,7 @@ Replace your_mongodb_connection_string with your actual MongoDB connection strin
 
 - **`package-lock.json:`** Contains the information of the dependencies versions.
 
-- **`package.json:`** Contains meta informations of the project.
+- **`package.json:`** Contains meta information of the project.
 
 - **`README.md:`** Contains complete details of the project.
 
@@ -134,6 +137,12 @@ Replace your_mongodb_connection_string with your actual MongoDB connection strin
     - **`POST /user/signup:`** User sign-up.
 
 ## Dependencies
+- **body-parser:** For parsing JSON request object
+- 
+- **cors:** For CORS policies
+- 
+- **dotenv:** For env variable
+
 - **express:** Web framework for Node.js.
 
 - **jsonwebtoken:** JSON Web Token implementation.
