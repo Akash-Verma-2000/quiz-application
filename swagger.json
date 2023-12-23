@@ -1,0 +1,261 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "description": "APIs for Quiz application",
+        "title": "Quiz Application's APIs"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5100"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "JWT": {
+                "in": "header",
+                "name": "Authorization",
+                "type": "apiKey"
+            }
+        }
+    },
+    "paths": {
+        "/user/signin": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login",
+                "description": "Returns the authentication token.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token"
+                    },
+                    "401": {
+                        "description": "Wrong Credentials"
+                    },
+                    "500": {
+                        "description": "Failed To SignIn"
+                    }
+                }
+            }
+        },
+        "/user/signup": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Register",
+                "description": "Returns newly registered user object.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registered User"
+                    },
+                    "409": {
+                        "description": "Email Already Exists"
+                    },
+                    "500": {
+                        "description": "Failed To SignUp"
+                    }
+                }
+            }
+        },
+        "/quizzes/all": {
+            "get": {
+                "tags": [
+                    "Quiz"
+                ],
+                "summary": "All Quizzes",
+                "description": "Returns all quizzes available on the server.",
+                "security": [
+                    {
+                        "JWT": {}
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All Quizzes"
+                    },
+                    "500": {
+                        "description": "Failed To Fetch Quizzes"
+                    },
+                    "401": {
+                        "description": "Unauthorized Access"
+                    }
+                }
+            }
+        },
+        "/quizzes/active": {
+            "get": {
+                "tags": [
+                    "Quiz"
+                ],
+                "summary": "All Active Quizzes",
+                "description": "Returns all active quizzes available on the server.",
+                "security": [
+                    {
+                        "JWT": {}
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All Active Quizzes"
+                    },
+                    "500": {
+                        "description": "Failed To Fetch Active Quiz"
+                    },
+                    "401": {
+                        "description": "Unauthorized Access"
+                    }
+                }
+            }
+        },
+        "/quizzes/{ID}/result": {
+            "get": {
+                "tags": [
+                    "Quiz"
+                ],
+                "summary": "Specific Quiz Result By Quiz ID",
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        " required": true,
+                        "description": "Enter The Quiz ID"
+                    }
+                ],
+                "description": "Takes the quiz id as url parameters and returns the result for the specific quiz.",
+                "security": [
+                    {
+                        "JWT": {}
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result"
+                    },
+                    "404": {
+                        "description": "Quiz Not Found/Quiz result not yet available"
+                    },
+                    "500": {
+                        "description": "Failed To Fetch Result"
+                    },
+                    "401": {
+                        "description": "Unauthorized Access"
+                    }
+                }
+            }
+        },
+        "/quizzes": {
+            "post": {
+                "tags": [
+                    "Quiz"
+                ],
+                "summary": "Create A Quiz",
+                "description": "Creates a new quiz.",
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "question": {
+                                        "type": "string",
+                                        "description": "Question for the quiz",
+                                        "example": "What is the capital of France?"
+                                    },
+                                    "options": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "description": "Array of options for the question"
+                                    },
+                                    "rightAnswer": {
+                                        "type": "number",
+                                        "description": "Index of the correct answer in the 'options' array"
+                                    },
+                                    "startDate": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "description": "Start date and time for the quiz in ISO format (e.g., '2023-12-31T08:00:00Z')"
+                                    },
+                                    "endDate": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "description": "End date and time for the quiz in ISO format (e.g., '2023-12-31T09:00:00Z')"
+                                    }
+                                },
+                                "required": [
+                                    "question",
+                                    "options",
+                                    "rightAnswer",
+                                    "startDate",
+                                    "endDate"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Newly Created Quiz Object"
+                    },
+                    "401": {
+                        "description": "Unauthorized Access"
+                    },
+                    "500": {
+                        "description": "Failed To Create Quiz"
+                    }
+                }
+            }
+        }
+    }
+}
