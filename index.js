@@ -18,7 +18,7 @@ import { quizRouter } from "./features/quiz/routes/quiz.route.js";
 import { userRouter } from "./features/user/route/user.route.js";
 const server = express();
 
-//CORS policy configurations
+//CORS policy configurations.
 server.use(cors());
 
 //Load all the env variables
