@@ -138,9 +138,9 @@ Replace your_mongodb_connection_string with your actual MongoDB connection strin
 
 ## Dependencies
 - **body-parser:** For parsing JSON request object
-- 
+  
 - **cors:** For CORS policies
-- 
+  
 - **dotenv:** For env variable
 
 - **express:** Web framework for Node.js.
