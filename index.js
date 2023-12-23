@@ -28,8 +28,14 @@ server.use(cors({
 //Load all the env variables
 dotenv.config();
 
-// Serve API documentation using Swagger UI
-server.use("/api-docs", swagger.serve, swagger.setup(apiDocs));
+// Serve API documentation using Swagger UI with additional CORS headers
+server.use("/api-docs", (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+}, swagger.serve, swagger.setup(apiDocs));
+
 
 // Parse incoming JSON requests
 server.use(bodyParser.json());
