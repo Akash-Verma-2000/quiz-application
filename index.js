@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import cors from "cors";
 
 // Importing Swagger and the API documentation file
 import swagger from 'swagger-ui-express';
@@ -16,6 +17,10 @@ import { connectToMongoose } from "./configurations/mongoose.config.js";
 import { quizRouter } from "./features/quiz/routes/quiz.route.js";
 import { userRouter } from "./features/user/route/user.route.js";
 const server = express();
+
+//CORS policy configurations
+
+server.use(cors());
 
 //Load all the env variables
 dotenv.config();
