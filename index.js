@@ -19,8 +19,11 @@ import { userRouter } from "./features/user/route/user.route.js";
 const server = express();
 
 //CORS policy configurations
-
-server.use(cors());
+server.use(cors({
+    origin: '*', // Change '*' to your frontend's URL in production for better security
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }));
 
 //Load all the env variables
 dotenv.config();
